@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
+using Core.Entities.Concrete;
 using Entities.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,7 +29,18 @@ namespace WebAPI.Controllers
                 return BadRequest(userToLogin.Message);
             }
 
-            var result = _authService.CreateAccessToken(userToLogin.Data);
+            var user = new User
+            {
+                Email = userToLogin.Data.Email,
+                FirstName = userToLogin.Data.FirstName,
+                LastName = userToLogin.Data.LastName,
+                Id = userToLogin.Data.Id,
+                PasswordHash = userToLogin.Data.PasswordHash,
+                PasswordSalt = userToLogin.Data.PasswordSalt,
+                PhoneNumber = userToLogin.Data.PhoneNumber
+            };
+
+            var result = _authService.CreateAccessToken(user);
             if (result.Success)
             {
                 return Ok(result.Data);
@@ -46,7 +58,7 @@ namespace WebAPI.Controllers
                 return BadRequest(userExists.Message);
             }
 
-            var registerResult = _authService.Register(userForRegisterDto,userForRegisterDto.Password);
+            var registerResult = _authService.Register(userForRegisterDto);
             var result = _authService.CreateAccessToken(registerResult.Data);
             if (result.Success)
             {

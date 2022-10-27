@@ -17,17 +17,41 @@ namespace Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ProductManager>().As<IProductService>();
-            builder.RegisterType<EfProductDal>().As<IProductDal>();
-
-            builder.RegisterType<CategoryManager>().As<ICategoryService>();
-            builder.RegisterType<EfCategoryDal>().As<ICategoryDal>();
-
             builder.RegisterType<UserManager>().As<IUserService>();
             builder.RegisterType<EfUserDal>().As<IUserDal>();
 
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
+
+            builder.RegisterType<DayManager>().As<IDayService>();
+            builder.RegisterType<EfDayDal>().As<IDayDal>();
+
+            builder.RegisterType<FoodManager>().As<IFoodService>();
+            builder.RegisterType<EfFoodDal>().As<IFoodDal>();
+
+            builder.RegisterType<MoveManager>().As<IMoveService>();
+            builder.RegisterType<EfMoveDal>().As<IMoveDal>();
+
+            builder.RegisterType<ReadyToUseDietFoodManager>().As<IReadyToUseDietFoodService>();
+            builder.RegisterType<EfReadyToUseDietFoodDal>().As<IReadyToUseDietFoodDal>();
+
+            builder.RegisterType<ReadyToUseDietManager>().As<IReadyToUseDietService>();
+            builder.RegisterType<EfReadyToUseDietDal>().As<IReadyToUseDietDal>();
+
+            builder.RegisterType<SubscriptionManager>().As<ISubscriptionService>();
+            builder.RegisterType<EfSubscriptionDal>().As<ISubscriptionDal>();
+
+            builder.RegisterType<UserDietManager>().As<IUserDietService>();
+            builder.RegisterType<EfUserDietDal>().As<IUserDietDal>();
+
+            builder.RegisterType<UserMoveManager>().As<IUserMoveService>();
+            builder.RegisterType<EfUserMoveDal>().As<IUserMoveDal>();
+
+            builder.RegisterType<WorkoutPlanManager>().As<IWorkoutPlanService>();
+            builder.RegisterType<EfWorkoutPlanDal>().As<IWorkoutPlanDal>();
+
+            builder.RegisterType<WorkoutPlanMoveManager>().As<IWorkoutPlanMoveService>();
+            builder.RegisterType<EfWorkoutPlanMoveDal>().As<IWorkoutPlanMoveDal>();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
